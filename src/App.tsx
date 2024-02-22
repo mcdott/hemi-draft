@@ -1,5 +1,6 @@
 import "./App.css";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ReadSim from "./components/ReadSim";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
           <TabsTrigger value='right'>Right</TabsTrigger>
         </TabsList>
       </Tabs>
+      <ReadSim />
     </>
   );
 }
