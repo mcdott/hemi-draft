@@ -1,0 +1,38 @@
+.fullScreenRightButtonStyles {
+  position: absolute;
+  top: 50%;
+  transform: translate(50%, -50%);
+  right: -50px;
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.fullScreenLeftButtonStyles {
+  position: absolute;
+  top: 50%;
+  transform: translate(-150%, -50%);
+  left: -50px;
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.fullScreenLeftButtonStyles svg,
+.fullScreenRightButtonStyles svg {
+  width: 40px;
+  height: 40px;
+  fill: #1f2937;
+}
