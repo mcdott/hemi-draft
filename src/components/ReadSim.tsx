@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import "./ReadSim.css";
-import customCursorImg from "../assets/purple-dash-96px.png";
-// https://icons8.com/icons/set/dash to change dash color
-
+import customCursorImg from "../assets/purple-dash-96px.png"; // https://icons8.com/icons/set/dash to change dash color
 import { Document, Page, pdfjs } from "react-pdf";
 import useResizeObserver from "use-resize-observer";
 import Quote from "../assets/Quote.pdf";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const ReadSim = () => {
   const [cursorX, setCursorX] = useState(0);
-  // overLayOnLeft set to false to start with the overlay on the right
-  const [overlayOnLeft, setOverlayOnLeft] = useState(false);
+  // Start with the overlay on the right
+  const [selectedTab, setSelectedTab] = useState("right");
   const { ref, width = 1 } = useResizeObserver<HTMLDivElement>();
 
   // Make the overlay follow mouse/touch movement
@@ -23,6 +21,12 @@ const ReadSim = () => {
     const touch = e.touches[0];
     setCursorX(touch.clientX);
   };
+
+  const handleChangeOverlaySide = (value: string) => {
+    setSelectedTab(value);
+  };
+
+  const overlayOnLeft = selectedTab === "left";
 
   const overlayStyle: React.CSSProperties = overlayOnLeft
     ? {
@@ -44,13 +48,8 @@ const ReadSim = () => {
         zIndex: 10,
       };
 
-  const toggleOverlaySide = () => {
-    setOverlayOnLeft(!overlayOnLeft);
-  };
-
   return (
     <>
-      <button onClick={toggleOverlaySide}>Toggle Overlay Side</button>
       <div
         className='sim-container'
         onMouseMove={handleMouseMove}
@@ -60,11 +59,27 @@ const ReadSim = () => {
           width: "100%",
           height: "100%",
           cursor: `url(${customCursorImg}), auto`,
+          position: "relative",
+          overflow: "hidden",
+          borderStyle: "solid",
+          borderColor: "red",
+          borderWidth: "2px",
+          borderRadius: "5px",
         }}
       >
         <div className='overlay' style={overlayStyle}></div>
         <Document file={Quote}>
-          <Page width={width} pageNumber={1} />
+          <Tabs
+            defaultValue='right'
+            className='w-[400px] mx-auto'
+            onValueChange={handleChangeOverlaySide}
+          >
+            <TabsList>
+              <TabsTrigger value='left'>Left</TabsTrigger>
+              <TabsTrigger value='right'>Right</TabsTrigger>
+            </TabsList>
+          </Tabs>
+          <Page width={width} pageNumber={1}></Page>
         </Document>
       </div>
     </>
