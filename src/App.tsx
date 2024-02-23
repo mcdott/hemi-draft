@@ -1,6 +1,6 @@
 import "./App.css";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ReadSim from "./components/ReadSim";
+// import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+// import ReadSim from "./components/ReadSim";
 import FullScreenIframe from "./components/FullScreenIframe";
 
 function App() {
